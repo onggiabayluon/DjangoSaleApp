@@ -36,30 +36,31 @@
                         {{ category.name }}
                     </a>
                 </li>
-                {% endfor %}
+                {% endfor %} {% endcomment %}
 
-                {% if current_user.is_authenticated %}
+                {% if user.is_authenticated %}
 
-                    {% with name=current_user.name, email=current_user.email %}
+                    {% include 'components/user_profile.html' %}
+                    {% comment %} {% with name=user.name, email=user.email %}
 
-                        {% include './user/components/user_profile.html' %}
+                        
 
-                    {% endwith %}
+                    {% endwith %} {% endcomment %}
 
                 {% else %}
 
                     <li class="nav-item">
-                        <a href="{{ url_for('user_login') }}" class="nav-link waves-effect">
+                        <a href="{% url 'accounts:login' %}" class="nav-link waves-effect">
                             Log In
                         </a>
                     </li>
                     <li class="nav-item pl-2 mb-2 mb-md-0">
-                        <a href="{{ url_for('user_register') }}" type="button"
+                        <a href="{% url 'accounts:signup' %}" type="button"
                             class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
                             Sign Up</a>
                     </li>
 
-                {% endif %} {% endcomment %}
+                {% endif %}
                 
             </ul>
 
