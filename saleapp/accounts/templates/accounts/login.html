@@ -1,0 +1,38 @@
+{% extends 'base_layout.html' %}
+
+{% block head %}
+<title>{{ title }}</title>
+{% endblock head %}
+
+
+{% block jumbotron %}
+<div class="jumbotron color-grey-light mt-70">
+    <div class="d-flex align-items-center h-100">
+        <div class="container text-center py-5">
+            <h3 class="mb-0">Log up</h3>
+        </div>
+    </div>
+</div>
+{% endblock jumbotron %}
+
+
+
+{% block body %}
+<div class="container">
+    <form action="{% url 'accounts:login' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+<script>
+    document.getElementById("navbar").classList.remove("navbar-transparent");
+</script>
+{% endblock scripts %}

@@ -4,11 +4,11 @@
         <a class="rounded-circle " href="#" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <div class="avatar avatar-md avatar-indicators avatar-online">
-                {% if current_user.avatar %}
-                <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ current_user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ current_user.name }}" />
+                {% if user.avatar %}
+                <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ user.name }}" />
                 
                 {% else %}
-                <img src="https://avatars.dicebear.com/api/human/{{ current_user.name }}.svg" class="rounded-circle" width="30" alt="{{ current_user.name }}" />
+                <img src="https://avatars.dicebear.com/api/human/{{ user.name }}.svg" class="rounded-circle" width="30" alt="{{ user.name }}" />
                 {% endif %}
             </div>
         </a>
@@ -17,10 +17,10 @@
             <div class="dropdown-item">
                 <div class="d-flex py-2">
                     <div class="avatar avatar-md avatar-indicators avatar-online">
-                        {% if current_user.avatar %}
-                        <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ current_user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ current_user.name }}" />
+                        {% if user.avatar %}
+                        <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ user.name }}" />
                         {% else %}
-                        <img src="https://avatars.dicebear.com/api/human/{{ current_user.name }}.svg" class="rounded-circle" width="30" alt="{{ current_user.name }}" />
+                        <img src="https://avatars.dicebear.com/api/human/{{ user.name }}.svg" class="rounded-circle" width="30" alt="{{ user.name }}" />
                         {% endif %}
                     </div>
                     <div class="ml-3 lh-1">
@@ -111,17 +111,21 @@
             <div class="dropdown-divider"></div>
             <ul class="list-unstyled">
                 <li>
-                    <a class="dropdown-item" href="{{ url_for('user_logout') }}">
-                        <span class="mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-power">
-                                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
-                                <line x1="12" y1="2" x2="12" y2="12"></line>
-                            </svg>
-                        </span>
-                        Sign Out
-                    </a>
+                    <form id="logout-form" class="dropdown-item" action="{% url 'accounts:logout' %}" method="post">
+                        {% csrf_token %}
+                        
+                        <a style="padding: 10px 0;width: 100%" href="javascript:{}" onclick="document.getElementById('logout-form').submit();">
+                            <span class="mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-power">
+                                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                                    <line x1="12" y1="2" x2="12" y2="12"></line>
+                                </svg>
+                            </span>
+                            Sign Out
+                        </a>
+                    </form>
                 </li>
 
             </ul>
