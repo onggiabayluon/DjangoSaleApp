@@ -21,12 +21,12 @@
             <!-- Right -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    {% comment %} <a href="{% url 'cart'%}" class="nav-link navbar-link-2 waves-effect">
+                    <a href="{% url 'shopping:cart' %}" class="nav-link navbar-link-2 waves-effect">
                         <span id="cart__counter" class="badge badge-pill red">
-                            {{ cart_details.total_quantity }}
+                            0
                         </span>
                         <i class="fas fa-shopping-cart pl-0"></i>
-                    </a> {% endcomment %}
+                    </a>
                 </li>
                 
                 
