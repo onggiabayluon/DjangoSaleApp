@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'base_layout.html'%}
 
 {% block head %}
 <title>{{ title }}</title> 
@@ -38,35 +38,40 @@
                                     <div class="py-2 text-uppercase">Quantity</div>
                                 </th>
                                 <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Total</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
                                     <div class="py-2 text-uppercase">Remove</div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if 'cart' in session and session['cart'] %}
-                            {% for cart in session['cart'].values() %}
+                            {% comment %} {% if 'cart' in session and session['cart'] %}
+                            {% for cart in session['cart'].values() %} {% endcomment %}
+                            {% for item in items %}
                             <tr id="cart-{{ cart.id }}">
                                 <th scope="row" class="border-0">
                                     <div class="p-2">
-                                        <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_263,q_auto,f_auto/{{ cart.image }}" alt="{{ cart.name }}" width="70" height="81"
+                                        <img src="{{ item.product.thumbnail.url }}" alt="{{ item.product.name }}" width="70" height="81"
                                             class="img-fluid rounded shadow-sm">
                                         <div class="ml-3 d-inline-block align-middle">
                                             <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">
-                                                {{ cart.name }}</a></h5><span
+                                                {{ item.product.name }}</a></h5><span
                                                 class="text-muted font-weight-normal font-italic d-block">Category:
-                                                Watches</span>
+                                                {{ item.product.category }}</span>
                                         </div>
                                     </div>
                                 </th>
-                                <td class="border-0 align-middle"><strong>{{ "{:,.0f}".format(cart.price) }} VNĐ</strong></td>
+                                <td class="border-0 align-middle"><strong>${{ item.product.price }}</strong></td>
                                 <td class="border-0 align-middle">
                                     <input min="1"
                                     class="form-control" 
                                     type="number" 
                                     name="quantity" 
-                                    value="{{ cart.quantity }}"
+                                    value="{{ item.quantity }}"
                                     oninput="updateCart(this, {{ cart.id }})">
                                 </td>
+                                <td class="border-0 align-middle"><strong>${{ item.get_total }}</strong></td>
                                 <td class="border-0 align-middle">
                                     <a href="#" class="text-dark" onclick="deleteCart(this, {{ cart.id }})">
                                         <i class="fa fa-trash"></i>
@@ -74,7 +79,8 @@
                                 </td>
                             </tr>
                             {% endfor %}
-                            {% endif %}
+                            {% comment %} {% endfor %}
+                            {% endif %} {% endcomment %}
                         </tbody>
                     </table>
                 </div>
@@ -109,28 +115,29 @@
                         <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have
                             entered.</p>
                         <ul class="list-unstyled mb-4">
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order
-                                    Subtotal </strong>
-                                    <strong class="cart__amount">{{ "{:,.0f}".format(cart_details.total_amount) }} VNĐ</strong>
-                            </li>
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                     class="text-muted">Total Order</strong>
-                                    <strong id="cart__counter-2">{{ cart_details.total_quantity }}</strong>
+                                    <strong id="cart__counter-2">{{ order.get_cart_count }}</strong>
                             </li>
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping
                                     and handling</strong><strong>$0.00</strong></li>
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                     class="text-muted">Total</strong>
-                                <h5 class="cart__amount font-weight-bold">{{ "{:,.0f}".format(cart_details.total_amount) }} VNĐ</h5>
+                                <h5 class="cart__amount font-weight-bold">{{ order.get_cart_total }}</h5>
                             </li>
                         </ul>
 
-                        {% if current_user.is_authenticated %}
+                        {% if user.is_authenticated %}
                             <a href="#" onclick="pay()" class="btn btn-dark rounded-pill py-2 btn-block p-3">
                                 Procceed to checkout
                             </a>
                         {% else %}
-                            <p class="bg-warning rounded-pill p-3">Please <a class="text-uppercase font-weight-bold" href="{{ url_for('user_login', next='cart') }}">Login</a> to proceed your payment </p>
+                            <p class="bg-warning rounded-pill p-3">Please 
+                                <a class="text-uppercase font-weight-bold" href="
+                                {% comment %} {{ url_for('user_login', next='cart') }} {% endcomment %}
+                                ">
+                                    Login
+                                </a> to proceed your payment </p>
                         {% endif %}
 
                     </div>

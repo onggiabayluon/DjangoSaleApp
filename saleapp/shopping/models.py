@@ -1,7 +1,9 @@
 from autoslug import AutoSlugField
-from django.db import models
-from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils.text import slugify
 
 
 class Customer(models.Model):
@@ -11,6 +13,11 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+
+    @receiver(post_save, sender=User)
+    def create_customer(sender, instance, created, **kwargs):
+        if created:
+            Customer.objects.create(user=instance, name=instance.username)
 
 
 class Product(models.Model):
@@ -41,12 +48,29 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+    @property
+    def get_cart_total(self):
+        order_items = self.orderitem_set.all()
+        cart_total = sum([order_item.get_total for order_item in order_items])
+        return cart_total
+    
+    @property
+    def get_cart_count(self):
+        order_items = self.orderitem_set.all()
+        cart_count = sum([order_item.quantity for order_item in order_items])
+        return cart_count
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_total(self):
+        total = self.product.price * self.quantity
+        return total
 
 
 class Category(models.Model):

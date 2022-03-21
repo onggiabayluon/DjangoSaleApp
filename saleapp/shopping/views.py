@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Product
+from .models import Order, Product
 
 
 
@@ -11,8 +11,15 @@ def product_detail(request, slug):
 
 
 def cart_view(request):
-    context = {'title': 'Cart'}
-    return HttpResponse('cart')
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_count': 0}
+        
+    context = {'title': 'Cart', 'items': items, 'order': order}
     return render(request, 'shopping/cart.html', context)
 
 
