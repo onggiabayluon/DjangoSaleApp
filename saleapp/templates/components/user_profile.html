@@ -5,10 +5,10 @@
             aria-expanded="false">
             <div class="avatar avatar-md avatar-indicators avatar-online">
                 {% if user.avatar %}
-                <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ user.name }}" />
+                <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ user.username }}" />
                 
                 {% else %}
-                <img src="https://avatars.dicebear.com/api/human/{{ user.name }}.svg" class="rounded-circle" width="30" alt="{{ user.name }}" />
+                <img src="https://avatars.dicebear.com/api/human/{{ user.username }}.svg" class="rounded-circle" width="30" alt="{{ user.username }}" />
                 {% endif %}
             </div>
         </a>
@@ -18,14 +18,14 @@
                 <div class="d-flex py-2">
                     <div class="avatar avatar-md avatar-indicators avatar-online">
                         {% if user.avatar %}
-                        <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ user.name }}" />
+                        <img src="https://res.cloudinary.com/dwajvm53v/image/fetch/w_40,h_40,q_auto,f_auto/{{ user.avatar }}" class="rounded-circle" width="40" height="40" alt="{{ user.username }}" />
                         {% else %}
-                        <img src="https://avatars.dicebear.com/api/human/{{ user.name }}.svg" class="rounded-circle" width="30" alt="{{ user.name }}" />
+                        <img src="https://avatars.dicebear.com/api/human/{{ user.username }}.svg" class="rounded-circle" width="30" alt="{{ user.username }}" />
                         {% endif %}
                     </div>
                     <div class="ml-3 lh-1">
-                        <h5 class="mb-0">{{name}}</h5>
-                        <p class="mb-0">{{email}}</p>
+                        <h5 class="mb-0">{{user.username}}</h5>
+                        <p class="mb-0">{{user.email}}</p>
                     </div>
 
                 </div>

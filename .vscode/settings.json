@@ -1,6 +1,8 @@
 {
     "python.formatting.provider": "autopep8",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "files.autoSave": "afterDelay",
-    "emmet.includeLanguages": {"django-html": "html"}
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
 }
