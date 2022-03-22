@@ -1,0 +1,111 @@
+{% extends 'base_layout.html'%}
+
+{% block head %}
+<title>{{ title }}</title> 
+{% endblock head %}
+
+
+{% block jumbotron %}
+<div class="jumbotron jumbotron-image color-grey-light"
+    style="background-image: url('https://mdbootstrap.com/img/Photos/Others/clothes(3)-crop.jpg'); height: 400px;">
+    <div class="mask rgba-black-strong d-flex align-items-center h-100">
+        <div class="container text-center white-text py-5">
+            <h1 class="mb-0">Checkout</h1>
+        </div>
+    </div>
+</div>
+{% endblock jumbotron %}
+
+
+{% block body %}
+    <section class="cart container mt-5" id="cart">
+
+            <div class="row col-lg-12 pb-5">
+                <a href="{% url 'shopping:cart' %}"><button type="button" class="btn btn-outline-primary">Back to Cart</button></a>
+            </div>
+
+            <div class="row">
+                <div class="card col-lg-6">
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Customer Info</div>
+                    <form>
+                        <div class="form-row m-2">
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Shipping Info</div>
+                        <div class="form-row m-2">
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="Address">
+                            </div>
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="City">
+                            </div>
+                        </div>
+                        <div class="form-row m-2">
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="State">
+                            </div>
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="Zip code">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card col-lg-6">
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                    <div class="p-4">
+                        <div class="container">
+                            {% for item in items %}
+                            <div class="row pb-4  align-items-center">
+                                <div class="col-sm">
+                                    <img src="{{ item.product.thumbnail.url }}" alt="{{ item.product.name }}" width="70" height="81"
+                                                class="img-fluid rounded shadow-sm">
+                                </div>
+                                <div class="col-sm">
+                                {{ item.product.name }}
+                                </div>
+                                <div class="col-sm">
+                                {{ item.product.price }}
+                                </div>
+                                <div class="col-sm">
+                                {{ item.quantity }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                    class="text-muted">Items</strong>
+                                    <strong id="cart__counter-2">{{ order.get_cart_count }}</strong>
+                            </li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                    class="text-muted">Total</strong>
+                                <h5 class="cart__amount font-weight-bold">{{ order.get_cart_total }}</h5>
+                            </li>
+                        </ul>
+
+                        {% if user.is_authenticated %}
+                            <a href="#" onclick="pay()" class="btn btn-dark rounded-pill py-2 btn-block p-3">
+                                Continue
+                            </a>
+                        {% else %}
+                            <p class="bg-warning rounded-pill p-3">Please 
+                                <a class="text-uppercase font-weight-bold" href="
+                                {% comment %} {{ url_for('user_login', next='cart') }} {% endcomment %}
+                                ">
+                                    Login
+                                </a> to proceed your payment </p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div> <!-- End Checkout table -->
+        
+    </section>
+    
+{% endblock body %}
