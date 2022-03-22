@@ -1,100 +1,95 @@
+var updateBtns = document.getElementsByClassName('update-cart');
+var updateQuantityBtns = document.getElementsByClassName('update-cart-quantity');
 var cartCounter = document.getElementById('cart__counter')
 var cartCounter2 = document.getElementById('cart__counter-2')
-var cartAmounts = document.getElementsByClassName('cart__amount')
+var cartAmount = document.getElementById('cart__amount')
+var update_item_url = '/shopping/update_item/'
+var delete_item_url = '/shopping/delete_item/'
+var update_item_quantity_url = '/shopping/update_item_quantity/'
 
-function addToCart(id, name, price, image) {
-    event.preventDefault()
-    // promise
-    fetch('/api/add-to-cart', {
+
+for (let i = 0; i < updateBtns.length; i++) {
+    updateBtns[i].addEventListener('click', function() {
+        var productId = this.dataset.product
+        var action = this.dataset.action
+       
+        if (user === 'AnonymousUser') {
+            console.log('Not logged in')
+        } else {
+            updateUserOrder(productId, action)
+        }
+
+    })
+}
+
+function updateUserOrder(productId, action) {
+    fetch(update_item_url, {
         method: 'post',
         body: JSON.stringify({
-            'id': id,
-            'name': name,
-            'price': price,
-            'image': image
+            'productId': productId,
+            'action': action
         }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
         }
     })
     .then(res => res.json())
     .then(data => {
         // console.log(data)
-        
-        cartCounter.innerText = data.total_quantity
+        cartCounter.innerText = data.cart_count
     })
-    .catch(err => console.error(err))
-};
+}
 
-function updateCart(obj, id) {
-    fetch('/api/update-cart', {
-        method: 'put',
+
+function updateItemQuantity(obj, productId) {
+    fetch(update_item_quantity_url, {
+        method: 'post',
         body: JSON.stringify({
-            id: id,
-            quantity: parseInt(obj.value)
+            'productId': productId,
+            'quantity': parseInt(obj.value)
         }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
         }
     })
-    .then(res => res.json())
-    .then(res => {
-        cartCounter.innerText = res.data.total_quantity
-        cartCounter2.innerText = res.data.total_quantity
-        
-        cartAmounts.forEach(cartAmount => {
-            cartAmount.innerText = new Intl.NumberFormat().format(res.data.total_amount) + " VND"
-        })
-    }) 
-    .catch(err => console.error(err))
-};
-
-
-function deleteCart(obj, id) {
-    event.preventDefault()
-
-    if (confirm('Ban chac chan muon xoa khong?') == true) {
-        fetch('/api/delete-cart', {
-            method: 'delete',
-            body: JSON.stringify({
-                id: id
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
         .then(res => res.json())
-        .then(res => {
-            if (res.code == 200) {
-                cartCounter.innerText = res.data.total_quantity
-                cartCounter2.innerText = res.data.total_quantity
-                
-                cartAmounts.forEach(cartAmount => {
-                    cartAmount.innerText = new Intl.NumberFormat().format(res.data.total_amount) + " VND"
-                })
-
-                var parent = obj.closest(`#cart-${id}`)
-                parent.remove()
-            }
-        }) 
-        .catch(err => console.error(err))
-        
-    }
-};
+        .then(data => {
+            cartCounter.innerText = data.cart_count
+            cartCounter2.innerText = data.cart_count
+            let item_price = document.getElementById(`product-price-${productId}`)
+            item_price.innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.item_total)
+            cartAmount.innerHTML = "$" + data.cart_total
+        })
+}
 
 
-function pay() {
+function deleteCartItem(obj, productId) {
     event.preventDefault()
     
-    if (confirm('Ban chac chan thanh toan khong?') == true) {
-        fetch('/api/pay', {
-            method: 'post'
+    if (confirm('Ban chac chan muon xoa khong?') == true) {
+        fetch(delete_item_url, {
+            method: 'post',
+            body: JSON.stringify({
+                'productId': productId,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            }
         })
         .then(res => res.json())
         .then(data => {
-            if (data.code === 200)
-            location.reload()
+            cartCounter.innerText = data.cart_count
+            cartCounter2.innerText = data.cart_count
+            let item_price = document.getElementById(`product-price-${productId}`)
+            item_price.innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.item_total)
+            cartAmount.innerHTML = "$" + data.cart_total
+
+            var parent = obj.closest(`#cart-${productId}`)
+            parent.remove()
         })
-        .catch(err => console.error(err))
     }
-};
+
+}
