@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/mdb-pro.min.css' %}">
     <!-- Material Design Bootstrap Ecommerce -->
     <link rel="stylesheet" href="{% static 'css/mdb.ecommerce.min.css' %}">
+    
 
     <script type="text/javascript">
         const user = '{{ request.user }}';
@@ -53,6 +54,8 @@
     </header>
 
     <main class="main" id="main">
+        {% include 'layout/message.html' %}
+        
         {% block body %}{% endblock body %}
     </main>
 

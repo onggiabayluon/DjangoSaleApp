@@ -240,9 +240,18 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button type="button" class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light">Buy
+                        <button 
+                        onclick="window.location='{% url 'shopping:cart' %}';"
+                        data-product="{{ product.id }}"
+                        data-action="add"
+                        type="button" 
+                        class="update-cart btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light">Buy
                             now</button>
-                        <button type="button" class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light"><i
+                        <button 
+                        data-product="{{ product.id }}"
+                        data-action="add"
+                        type="button" 
+                        class="update-cart btn btn-light btn-md mr-1 mb-2 waves-effect waves-light"><i
                                 class="fas fa-shopping-cart pr-2"></i>Add to
                             cart</button>
                     </div>

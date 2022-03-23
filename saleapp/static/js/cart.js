@@ -5,6 +5,7 @@ var cartCounter2 = document.getElementById('cart__counter-2')
 var cartAmount = document.getElementById('cart__amount')
 var update_item_url = '/shopping/update_item/'
 var delete_item_url = '/shopping/delete_item/'
+var process_order_url = '/shopping/process_order/'
 var update_item_quantity_url = '/shopping/update_item_quantity/'
 
 

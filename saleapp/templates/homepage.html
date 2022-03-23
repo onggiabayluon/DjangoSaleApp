@@ -227,7 +227,6 @@
               <p><span class="mr-1"><strong>${{ product.price }}</strong></span></p>
               <button 
               type="button" 
-              {% comment %} onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.price }}, '{{ product.thumbnail.url }}')" {% endcomment %}
               data-product="{{ product.id }}"
               data-action="add"
               class="update-cart btn btn-primary btn-sm mr-1 mb-2 waves-effect waves-light"><i class="fas fa-shopping-cart pr-2"></i>

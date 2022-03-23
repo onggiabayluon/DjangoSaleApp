@@ -21,6 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+9xe1!gr4q(qi3kjwj+%2+9h(bowxowy5!t(z=rim7@5-mgcnx'
+STRIPE_PUBLIC_KEY = 'pk_test_51Kg8hXB5NdgJpMiZ2piWz6VlOF0PXW0PJv1jPrbKopJ0ZwgphouQCYxI2opgGE5aM5jPK2K8WyOdkj5W96FGdX9t00mw1gGuTV'
+STRIPE_SECRET_KEY = 'sk_test_51Kg8hXB5NdgJpMiZuvnG1nB20MllQDFlQWSu3vffYDlXZLIbDFb7y09aMxiksw4o74JxkYmWqnQJxJSiXyMRmdZE00cz3EWQpg'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shopping',
-    'accounts'
+    'accounts',
 ]
 
 MIDDLEWARE = [
