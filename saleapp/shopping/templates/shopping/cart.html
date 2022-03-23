@@ -113,7 +113,7 @@
                         </ul>
 
                         {% if user.is_authenticated %}
-                            <a href="#" onclick="pay()" class="btn btn-dark rounded-pill py-2 btn-block p-3">
+                            <a href="{% url 'shopping:checkout' %}" class="btn btn-dark rounded-pill py-2 btn-block p-3">
                                 Procceed to checkout
                             </a>
                         {% else %}
