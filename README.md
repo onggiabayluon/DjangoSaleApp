@@ -98,13 +98,9 @@
 
 <!-- ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ``` -->
+To install Python on your machine go to https://www.python.org/downloads/. The website should offer you a download button for the latest Python version. Download the executable installer and run it. Check the boxes next to “Install launcher for all users (recommended)” then click “Install Now”.
 
-### Installation
+### Project Installation
 
 1. Clone the repo
    ```sh
@@ -113,8 +109,17 @@ This is an example of how to list things you need to use the software and how to
 
 2. Install packages
    ```sh
-   pip install
+   pip install requirements.txt
    ```
+
+3. Run the Project
+   ```sh
+   cd saleapp
+   ```
+   ```sh
+   python manage.py runserver
+   ```
+
 
 
 ### (Optional) Write your first Django app
