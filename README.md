@@ -100,7 +100,7 @@
 
 To install Python on your machine go to https://www.python.org/downloads/. The website should offer you a download button for the latest Python version. Download the executable installer and run it. Check the boxes next to “Install launcher for all users (recommended)” then click “Install Now”.
 
-### Project Installation
+### Installation
 
 1. Clone the repo
    ```sh
@@ -116,6 +116,7 @@ To install Python on your machine go to https://www.python.org/downloads/. The w
    ```sh
    cd saleapp
    ```
+
    ```sh
    python manage.py runserver
    ```
