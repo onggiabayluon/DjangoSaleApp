@@ -136,6 +136,14 @@ To install Python on your machine go to https://www.python.org/downloads/. The w
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+### Manage data using admin page
+
+1. Create admin account
+   ```sh
+   python manage.py createsuperuser
+   ```
+2. Go to url: /admin
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
