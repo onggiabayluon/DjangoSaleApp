@@ -107,16 +107,25 @@ To install Python on your machine go to https://www.python.org/downloads/. The w
    git clone https://github.com/onggiabayluon/Djangosaleapp.git
    ```
 
-2. Install packages
+2.1 Create a virtual environment
+2.2 Install packages
    ```sh
-   pip install requirements.txt
+   pip install -r requirements.txt
    ```
+2.3 Create Mysql Schema name: saleappdb
 
-3. Run the Project
+3. Migrate database Models
+   ```sh
+   python manage.py makemigrations
+   ```
+   ```sh
+   python manage.py migrate
+   ```
+   
+4. Run the Project
    ```sh
    cd saleapp
    ```
-
    ```sh
    python manage.py runserver
    ```
