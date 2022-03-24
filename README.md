@@ -96,7 +96,7 @@
 ## Getting Started
 
 
-<!-- ### Prerequisites -->
+### Prerequisites
 
 To install Python on your machine go to https://www.python.org/downloads/. The website should offer you a download button for the latest Python version. Download the executable installer and run it. Check the boxes next to “Install launcher for all users (recommended)” then click “Install Now”.
 
