@@ -192,7 +192,7 @@
               src="{{ product.thumbnail.url }}" 
               alt="{{ product.name }}" width="350" height="302">
               <h4 class="mb-0"><span class="badge badge-dark badge-pill badge-news">Sold out</span></h4>
-              <a href="{% url 'shopping:detail' slug=product.slug %}">
+              <a href="{{ product.get_absolute_url }}">
                 <div class="mask waves-effect waves-light">
                   <img class="img-fluid w-75 mx-auto" 
                   src="{{ product.thumbnail.url }}" 
