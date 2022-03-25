@@ -111,7 +111,7 @@ To install Python on your machine go to https://www.python.org/downloads/. The w
 
 3. Run init.sh Scripts in Git bash
   
-  This Script Will auto Setup the project in one go
+  - This Script Will auto Setup the project in one go
   
    ```sh
    ./init.sh
