@@ -100,7 +100,25 @@
 
 To install Python on your machine go to https://www.python.org/downloads/. The website should offer you a download button for the latest Python version. Download the executable installer and run it. Check the boxes next to “Install launcher for all users (recommended)” then click “Install Now”.
 
-### Installation
+### Installation Using Scripts
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/onggiabayluon/Djangosaleapp.git
+   ```
+
+2. Create Mysql Schema name: saleappdb
+
+3. Run init.sh Scripts in Git bash
+  This Script Will auto Setup the project in one go
+  
+   ```sh
+   ./init.sh
+   ```
+   
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Nomal Installation
 
 1. Clone the repo
    ```sh
@@ -134,7 +152,6 @@ To install Python on your machine go to https://www.python.org/downloads/. The w
    
    
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ### Manage data using admin page
 
