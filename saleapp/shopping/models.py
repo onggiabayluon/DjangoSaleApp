@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+from django.shortcuts import reverse
 
 
 class Customer(models.Model):
@@ -30,7 +31,10 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     description = models.TextField(max_length=250, null=True)
 
-    # receipt_details id
+    def get_absolute_url(self):
+        return reverse("shopping:detail", kwargs={
+            'slug': self.slug
+        })
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
