@@ -108,8 +108,8 @@ To install Python on your machine go to https://www.python.org/downloads/. The w
    ```
 
 2. Setting your Mysql root name and password in settings.py file
-  https://github.com/onggiabayluon/Djangosaleapp/blob/master/saleapp/saleapp/settings.py
-
+  [./saleapp/saleapp/settings.py](https://github.com/onggiabayluon/Djangosaleapp/blob/8211f52ec9d7016039dd6b46cffbf22454e5348a/saleapp/saleapp/settings.py#L82)
+  
 3. Create Mysql Schema name: saleappdb
 
 4. Run init.sh Scripts in Git bash
